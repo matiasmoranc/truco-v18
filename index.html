@@ -748,7 +748,7 @@
 
   <!-- <div class="footer small">Brujas Truco Cup - 2025.</div> -->
    <script type="module">
-console.log('test14');
+console.log('test15');
   import {
   initializeApp,
   getApp,
@@ -918,6 +918,19 @@ function replaceState(latest) {
 
   const { ui: _ignoredUI, ...rest } = latest || {};
   Object.assign(state, rest);
+
+  state.meta = state.meta || {};
+  state.meta.title = state.meta.title || 'Torneo de Truco';
+  state.meta.format = state.meta.format || null;
+
+  state.config = state.config || {};
+  state.config.numPairs = state.config.numPairs || 4;
+  state.config.playoffSize = state.config.playoffSize || 2;
+
+  state.pairs = Array.isArray(state.pairs) ? state.pairs : [];
+  state.groups = state.groups || {};
+  state.groupMatches = Array.isArray(state.groupMatches) ? state.groupMatches : [];
+  state.leagueMatches = Array.isArray(state.leagueMatches) ? state.leagueMatches : [];
 
   state.playoffs = state.playoffs || {};
   state.playoffs.stage = state.playoffs.stage || 'none';
