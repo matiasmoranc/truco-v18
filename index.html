@@ -748,7 +748,7 @@
 
   <!-- <div class="footer small">Brujas Truco Cup - 2025.</div> -->
    <script type="module">
-console.log('6');
+console.log('test7');
   import {
   initializeApp,
   getApp,
@@ -792,6 +792,7 @@ window.firebaseAPI = {
   get,
   onValue
 };
+window.dispatchEvent(new Event('firebase-ready'));
 </script>
 
   <script>
@@ -2274,8 +2275,15 @@ if (btnPlus && inpNumPairs) {
     })();
 
     /******************** Inicializar ********************/
-    render();
-loadFirebaseState();
+render();
+
+if (window.firebaseAPI) {
+  loadFirebaseState();
+} else {
+  window.addEventListener('firebase-ready', () => {
+    loadFirebaseState();
+  });
+}
     // Modo público puro: ocultar admin y título
     if (VIEW_PUBLIC) { document.title = (state.meta.title || 'Torneo de Truco') + ' — Público' }
   </script>
