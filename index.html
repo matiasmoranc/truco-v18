@@ -745,8 +745,12 @@
 
   <!-- <div class="footer small">Brujas Truco Cup - 2025.</div> -->
    <script type="module">
-    cosnole.log('funcionando');
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+
+  import {
+  initializeApp,
+  getApp,
+  getApps
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
   import {
     getDatabase,
     ref,
@@ -766,11 +770,6 @@
   measurementId: "G-81RLJSBNND"
 };
 
-import {
-  getApp,
-  getApps
-} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-
 const firebaseApp =
   getApps().length
     ? getApp()
@@ -779,27 +778,12 @@ const firebaseApp =
 const firebaseDatabase = getDatabase(firebaseApp);
 
 window.firebaseDB = firebaseDatabase;
-  window.firebaseRef = ref;
-  window.firebaseSet = set;
-  window.firebaseGet = get;
-  window.firebaseOnValue = onValue;
+window.firebaseRef = ref;
+window.firebaseSet = set;
+window.firebaseGet = get;
+window.firebaseOnValue = onValue;
 </script>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-  import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 
-  const firebaseConfig = {
-    // pegá acá tu configuración de Firebase
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
-
-  window.firebaseDB = db;
-  window.firebaseRef = ref;
-  window.firebaseSet = set;
-  window.firebaseOnValue = onValue;
-</script>
   <script>
     //******************configuraciones*****************
     //Cantidad de partidos por pareja en liga
