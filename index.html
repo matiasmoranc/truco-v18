@@ -4,6 +4,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
   <title>Torneo de Truco</title>
   <style>
     :root {
@@ -2207,7 +2210,12 @@ if (btnPlus && inpNumPairs) {
     //   const f = e.target.files[0]; if(!f) return; const rd = new FileReader(); rd.onload=()=>{ try{ const data = JSON.parse(rd.result); Object.assign(state, data); saveAndRerender() }catch(err){ alert('Archivo inválido') } }; rd.readAsText(f)
     // }
 
-    const btnOpenPublic = document.getElementById('btnOpenPublic'); btnOpenPublic.onclick = () => { window.open(location.pathname + '?view=public#public', '_blank') }
+    const btnOpenPublic = document.getElementById('btnOpenPublic').onclick = () => {
+  window.open(
+    location.pathname + '?view=public&v=' + Date.now(),
+    '_blank'
+  );
+};
 
     // Ctrl+S → exportar
     // window.addEventListener('keydown', (e)=>{ if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='s'){ e.preventDefault(); btnSave.click() } })
