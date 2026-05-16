@@ -745,6 +745,7 @@
 
   <!-- <div class="footer small">Brujas Truco Cup - 2025.</div> -->
    <script type="module">
+    cosnole.log('funcionando');
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
   import {
     getDatabase,
@@ -808,23 +809,20 @@ window.firebaseDB = firebaseDatabase;
     const LS_KEY = 'truco_tournament_v1';
     const VIEW_PUBLIC = new URLSearchParams(location.search).get('view') === 'public' || location.hash === '#public';
 const state = createDefaultState();
-async function loadFirebaseState() {
-  try {
-    firebaseOnValue(
-      firebaseRef(firebaseDB, 'torneoActual'),
-      (snapshot) => {
-        const data = snapshot.val();
+function loadFirebaseState() {
+  firebaseOnValue(
+    firebaseRef(firebaseDB, 'torneoActual'),
+    (snapshot) => {
+      const data = snapshot.val();
 
-        if (!data) return;
+      console.log('🔥 Firebase update recibido:', data);
 
-        replaceState(data);
-        render();
-        loadFirebaseState();
-      }
-    );
-  } catch (e) {
-    console.error(e);
-  }
+      if (!data) return;
+
+      replaceState(data);
+      render();
+    }
+  );
 }
     // Canal entre pestañas (si el browser lo soporta)
     const bc = ('BroadcastChannel' in window) ? new BroadcastChannel('truco_tournament_channel') : null;
@@ -843,18 +841,18 @@ async function saveState() {
   const toSave = JSON.parse(JSON.stringify(state));
   delete toSave.ui;
 
-  localStorage.setItem(LS_KEY, JSON.stringify(toSave));
+  console.log('Guardando en Firebase...', toSave);
 
   try {
     await firebaseSet(
       firebaseRef(firebaseDB, 'torneoActual'),
       toSave
     );
+    console.log('✅ Guardado en Firebase OK');
   } catch (e) {
-    console.error('Firebase save error', e);
+    console.error('❌ Firebase save error', e);
   }
 }
-
     function loadState() { try { const s = localStorage.getItem(LS_KEY); return s ? JSON.parse(s) : null } catch (e) { return null } }
     function resetState() { localStorage.removeItem(LS_KEY) }
     function clone(o) { return JSON.parse(JSON.stringify(o)) }
