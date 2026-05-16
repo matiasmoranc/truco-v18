@@ -748,7 +748,7 @@
 
   <!-- <div class="footer small">Brujas Truco Cup - 2025.</div> -->
    <script type="module">
-console.log('test2');
+console.log('test3');
   import {
   initializeApp,
   getApp,
@@ -799,8 +799,8 @@ const state = createDefaultState();
 function loadFirebaseState() {
   console.log('👂 Escuchando Firebase...');
 
-  firebaseOnValue(
-    firebaseRef(firebaseDB, 'torneoActual'),
+  window.firebaseOnValue(
+    window.firebaseRef(window.firebaseDB, 'torneoActual'),
     (snapshot) => {
       const data = snapshot.val();
 
@@ -834,7 +834,7 @@ async function saveState() {
 
   try {
     await firebaseSet(
-      firebaseRef(firebaseDB, 'torneoActual'),
+    window.firebaseRef(window.firebaseDB,
       toSave
     );
     console.log('✅ Guardado en Firebase OK');
